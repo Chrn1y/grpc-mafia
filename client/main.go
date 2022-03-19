@@ -29,12 +29,15 @@ func vote(text string, variants []string) string {
 }
 
 func main() {
-	fmt.Print("Введи имя пользователя: ")
+	fmt.Print("Введи ip адрес сервера: ")
 	reader := bufio.NewReader(os.Stdin)
+	addr, _ := reader.ReadString(byte('\n'))
+	addr = addr[:len(addr) - 1]
+	fmt.Print("Введи имя пользователя: ")
 	name, _ := reader.ReadString(byte('\n'))
 	name = name[:len(name) - 1]
 	ctx := context.Background()
-	conn, err := grpc.Dial(":8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(addr + ":8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		fmt.Println(err)
 		return
