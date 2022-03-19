@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option go_package="./mafia_proto;mafia_proto";
+
+package app;
+
+service App{
+  rpc Play(stream Request) returns (stream Response) {}
+}
+
+enum RequestType{
+  register = 0;
+  vote_request = 1;
+}
+
+message Request {
+  message Register {
+    string name = 1;
+  }
+  message Vote {
+    string name = 1;
+  }
+  oneof data {
+    Register register = 1;
+    Vote vote = 2;
+  }
+  RequestType type = 3;
+}
+
+enum ResponseType {
+  vote_response = 0;
+  info = 1;
+}
+
+message Response {
+  message Vote {
+    string text = 1;
+    repeated string choose = 2;
+  }
+  message Info {
+    string text = 1;
+    bool end = 2;
+  }
+  oneof data {
+    Vote vote = 1;
+    Info info = 2;
+  }
+  ResponseType type = 3;
+}
