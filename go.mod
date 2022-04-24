@@ -3,6 +3,8 @@ module github.com/Chrn1y/grpc-mafia
 go 1.17
 
 require (
+	github.com/gorilla/mux v1.8.0
+	github.com/rs/xid v1.4.0
 	google.golang.org/grpc v1.45.0
 	google.golang.org/protobuf v1.27.1
 )
