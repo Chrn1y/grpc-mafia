@@ -126,11 +126,11 @@ func main() {
 		}
 		w.WriteHeader(http.StatusOK)
 	}
-	r.HandleFunc("/user/{id}", get).Methods("GET")
-	r.HandleFunc("/users", list).Methods("GET")
-	r.HandleFunc("/user/{id}", del).Methods("DELETE")
-	r.HandleFunc("/user/{id}", update).Methods("PUT")
-	r.HandleFunc("/user", insert).Methods("POST")
+	r.HandleFunc("/user/{id}", get).Methods(http.MethodGet)
+	r.HandleFunc("/users", list).Methods(http.MethodGet)
+	r.HandleFunc("/user/{id}", del).Methods(http.MethodDelete)
+	r.HandleFunc("/user/{id}", update).Methods(http.MethodPut)
+	r.HandleFunc("/user", insert).Methods(http.MethodPost)
 	srv := &http.Server{
 		Handler:      r,
 		Addr:         "127.0.0.1:8001",
